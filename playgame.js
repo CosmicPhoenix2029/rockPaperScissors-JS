@@ -22,13 +22,71 @@ function getUserChoice(){
 
 //function to play a single round and check who won
 function playRound(computerChoice, userChoice){
+    let results = {
+        text: "",
+        outcome: ""
+    };
+    switch(computerChoice){
+        case "rock": 
+            switch(userChoice){
+                case "rock": 
+                    results.text = `Draw! You both chose ${computerChoice}`;
+                    results.outcome = "Draw";
+                    break;
+                case "paper":
+                    results.text = `You Win! ${userChoice} beats ${computerChoice}`;
+                    results.outcome = "Win";
+                    break;
+                case "scissors":
+                    results.text = `You Lose! ${computerChoice} beats ${userChoice}`;
+                    results.outcome = "Lose";
+                    break;
+            }
+            break;
+        case "paper":
+            switch(userChoice){
+                case "rock":
+                    results.text = `You Lose! ${computerChoice} beats ${userChoice}`;
+                    results.outcome = "Lose";
+                    break;
+                case "paper":
+                    results.text = `Draw! You both chose ${computerChoice}`;
+                    results.outcome = "Draw";
+                    break;
+                case "scissors": 
+                    results.text = `Draw! You both chose ${computerChoice}`;
+                    results.outcome = "Draw";
+                    break;
+            }
+            break;
+        case "scissors":
+            switch(userChoice){
+                case "rock":
+                    results.text = `You Win! ${userChoice} beats ${computerChoice}`;
+                    results.outcome = "Win";
+                    break;
+                case "paper":
+                    results.text = `You Lose! ${computerChoice} beats ${userChoice}`;
+                    results.outcome = "Lose";
+                    break;
+                case "scissors": 
+                    results.text = `Draw! You both chose ${computerChoice}`;
+                    results.outcome = "Draw";
+                    break;
+            }
+            break;
+    }
 
+    return results;
 }
 
 //function to control the number of rounds played and displaying the results
 function playGame(){
 
 }
-
-console.log (getComputerChoice());
-console.log(getUserChoice());
+let computerChoice = getComputerChoice();
+let userChoice = getUserChoice();
+let results = playRound(computerChoice, userChoice);
+console.log (computerChoice);
+console.log(userChoice);
+console.log (results);
