@@ -1,7 +1,7 @@
 //function to generate the computers choice:
-function getComputerChoice(){
+function getComputerChoice() {
     let computerChoice = Math.floor(Math.random() * 3)   //random number from 0 - 2
-    switch (computerChoice){
+    switch (computerChoice) {
         case 0: return "rock";
         case 1: return "paper";
         case 2: return "scissors";
@@ -10,9 +10,9 @@ function getComputerChoice(){
 }
 
 //fuction to get and validate the users choice
-function getUserChoice(){
+function getUserChoice() {
     let userChoice = "";
-    do{
+    do {
         userChoice = prompt("Enter rock, paper or scissors: ", "rock").toLowerCase();
     }
     while(!(userChoice === "rock" || userChoice === "paper" || userChoice === "scissors"))
@@ -21,14 +21,14 @@ function getUserChoice(){
 }
 
 //function to play a single round and check who won
-function playRound(computerChoice, userChoice){
+function playRound(computerChoice, userChoice) {
     let results = {
         text: "",
         outcome: ""
     };
-    switch(computerChoice){
+    switch(computerChoice) {
         case "rock": 
-            switch(userChoice){
+            switch(userChoice) {
                 case "rock": 
                     results.text = `Draw! You both chose ${computerChoice}`;
                     results.outcome = "Draw";
@@ -44,7 +44,7 @@ function playRound(computerChoice, userChoice){
             }
             break;
         case "paper":
-            switch(userChoice){
+            switch(userChoice) {
                 case "rock":
                     results.text = `You Lose! ${computerChoice} beats ${userChoice}`;
                     results.outcome = "Lose";
@@ -60,7 +60,7 @@ function playRound(computerChoice, userChoice){
             }
             break;
         case "scissors":
-            switch(userChoice){
+            switch(userChoice) {
                 case "rock":
                     results.text = `You Win! ${userChoice} beats ${computerChoice}`;
                     results.outcome = "Win";
@@ -81,12 +81,27 @@ function playRound(computerChoice, userChoice){
 }
 
 //function to control the number of rounds played and displaying the results
-function playGame(){
+function playGame() {
+    const numberOfGames = parseInt(prompt("Enter the number of games you would like to play: ", 5));  
+    let computerChoice;
+    let userChoice;
+    let results;
+    let userScore = 0;
 
+    for(games = 0; games <= numberOfGames; games++) {
+        computerChoice = getComputerChoice();
+        userChoice = getUserChoice();
+        results = playRound(computerChoice, userChoice);
+
+        console.log(results.text);
+
+        if(results.outcome === "Win"){
+            userScore++;
+        }
+    }
+    let computerScore = numberOfGames - userScore;
+    if(userScore > computerScore) {console.log(`you are the overall winner!\n You scored: ${userScore}\n The computer scored: ${computerScore}`)}
+    else if(userScore === computerScore) {console.log(`The game is a Tie!\n You and the computer both scored: ${userScore}`)}
+    else(console.log(`The computer is the overall Winner!\n You scored: ${userScore}\n The computer scored: ${computerScore}`))
 }
-let computerChoice = getComputerChoice();
-let userChoice = getUserChoice();
-let results = playRound(computerChoice, userChoice);
-console.log (computerChoice);
-console.log(userChoice);
-console.log (results);
+playGame();
