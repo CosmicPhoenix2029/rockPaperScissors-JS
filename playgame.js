@@ -9,9 +9,15 @@ function getComputerChoice(){
     }
 }
 
-//fuction to get the users choice
+//fuction to get and validate the users choice
 function getUserChoice(){
-
+    let userChoice = "";
+    do{
+        userChoice = prompt("Enter rock, paper or scissors: ", "rock").toLowerCase();
+    }
+    while(!(userChoice === "rock" || userChoice === "paper" || userChoice === "scissors"))
+    
+    return userChoice;
 }
 
 //function to play a single round and check who won
@@ -25,4 +31,4 @@ function playGame(){
 }
 
 console.log (getComputerChoice());
-console.log
+console.log(getUserChoice());
