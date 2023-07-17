@@ -22,6 +22,7 @@ function getUserChoice() {
 
 //function to play a single round and check who won
 function playRound(computerChoice, userChoice) {
+    const resultsDiv = document.querySelector('#displayResults');  
     let results = {
         text: "",
         outcome: ""
@@ -76,13 +77,14 @@ function playRound(computerChoice, userChoice) {
             }
             break;
     }
-
+    
     return results;
 }
 
 //function to control the number of rounds played and displaying the results
 function playGame() {
-    const numberOfGames = parseInt(prompt("Enter the number of games you would like to play: ", 5));  
+    const numberOfGames = parseInt(prompt("Enter the number of games you would like to play: ", 5));
+    
     let computerChoice;
     let userChoice;
     let results;
@@ -105,3 +107,32 @@ function playGame() {
     else(console.log(`The computer is the overall Winner!\n You scored: ${userScore}\n The computer scored: ${computerScore}`))
 }
 playGame();
+
+
+//the DOM manipulation part
+//event listeners for the buttons
+const rockBtn = document.querySelector('#rock');
+const paperBtn = document.querySelector('#paper');
+const scissorsBtn = document.querySelector('#scissors');
+
+rockBtn.addEventListener(
+    'click', () => {
+        const computerChoice = getComputerChoice();
+        const userChoice = 'rock';
+        playRound(computerChoice, userChoice);
+    }
+);
+paperBtn.addEventListener(
+    'click', () => {
+        const computerChoice = getComputerChoice();
+        const userChoice = 'paper';
+        playRound(computerChoice, userChoice);
+    }
+);
+scissorsBtn.addEventListener(
+    'click', () => {
+        const computerChoice = getComputerChoice();
+        const userChoice = 'scissors';
+        playRound(computerChoice, userChoice);
+    }
+);
