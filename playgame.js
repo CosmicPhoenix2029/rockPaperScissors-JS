@@ -147,6 +147,10 @@ function addResult(results) {
         while(resultsDiv.lastElementChild) {
             resultsDiv.removeChild(resultsDiv.lastElementChild);
         }
+        //reset the counters
         gameCount = 0;
+        userScore = 0;
+        computerScore = 0;
+        drawCount = 0;
     }
 }
