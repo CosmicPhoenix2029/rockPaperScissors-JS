@@ -57,9 +57,6 @@ button {
     justify-content: center;
     align-items: center;
 }
-button img {
-
-}
 
 #displayResults {
     display: flex;
