@@ -22,7 +22,6 @@ function getUserChoice() {
 
 //function to play a single round and check who won
 function playRound(computerChoice, userChoice) {
-    const resultsDiv = document.querySelector('#displayResults');  
     let results = {
         text: "",
         outcome: ""
@@ -77,37 +76,18 @@ function playRound(computerChoice, userChoice) {
             }
             break;
     }
-    
-    return results;
-}
 
-//function to control the number of rounds played and displaying the results
-function playGame() {
-    const numberOfGames = parseInt(prompt("Enter the number of games you would like to play: ", 5));
-    
-    let computerChoice;
-    let userChoice;
-    let results;
-    let userScore = 0;
-
-    for(games = 0; games <= numberOfGames; games++) {
-        computerChoice = getComputerChoice();
-        userChoice = getUserChoice();
-        results = playRound(computerChoice, userChoice);
-
-        console.log(results.text);
-
-        if(results.outcome === "Win"){
+        if(results.outcome === "Win") {
             userScore++;
         }
-    }
-    let computerScore = numberOfGames - userScore;
-    if(userScore > computerScore) {console.log(`you are the overall winner!\n You scored: ${userScore}\n The computer scored: ${computerScore}`)}
-    else if(userScore === computerScore) {console.log(`The game is a Tie!\n You and the computer both scored: ${userScore}`)}
-    else(console.log(`The computer is the overall Winner!\n You scored: ${userScore}\n The computer scored: ${computerScore}`))
+        else if(results.outcome === "Lose") {
+            computerScore++;
+        }
+        else { 
+            drawCount++;
+        }
+    return results;
 }
-playGame();
-
 
 //the DOM manipulation part
 //event listeners for the buttons
@@ -115,24 +95,58 @@ const rockBtn = document.querySelector('#rock');
 const paperBtn = document.querySelector('#paper');
 const scissorsBtn = document.querySelector('#scissors');
 
+let gameCount = 0;
+let userScore = 0;
+let drawCount = 0;
+let computerScore = 0;
+
 rockBtn.addEventListener(
-    'click', () => {
+    "click", function() {
         const computerChoice = getComputerChoice();
         const userChoice = 'rock';
-        playRound(computerChoice, userChoice);
+        addResult(playRound(computerChoice, userChoice));
     }
-);
+)
+
 paperBtn.addEventListener(
-    'click', () => {
+    "click", function() {
         const computerChoice = getComputerChoice();
         const userChoice = 'paper';
-        playRound(computerChoice, userChoice);
+        addResult(playRound(computerChoice, userChoice));
     }
-);
+)
+
 scissorsBtn.addEventListener(
-    'click', () => {
+    "click", function() {
         const computerChoice = getComputerChoice();
         const userChoice = 'scissors';
-        playRound(computerChoice, userChoice);
+        addResult(playRound(computerChoice, userChoice));
     }
-);
+)
+
+//function to update results
+function addResult(results) {
+    const resultsDiv = document.querySelector('#displayResults');
+    const resultsP = document.createElement('p');
+    resultsP.textContent = `Round ${gameCount + 1}: ${results.text}`;
+    resultsDiv.appendChild(resultsP);  
+    gameCount++;
+
+    if (gameCount > 4) {
+        if(userScore > computerScore) { 
+            alert(`you are the overall winner!\n You scored: ${userScore}\n The computer scored: ${computerScore}\n You drew ${drawCount} times`)
+        }
+        else if(userScore === computerScore) {
+            alert(`The game is a Tie!\n You and the computer both scored: ${userScore}\n You drew ${drawCount} times`)
+        }
+        else{ 
+            alert(`The computer is the overall Winner!\n You scored: ${userScore}\n The computer scored: ${computerScore}\n You drew ${drawCount} times`)
+        }
+
+        //remove previous results
+        while(resultsDiv.lastElementChild) {
+            resultsDiv.removeChild(resultsDiv.lastElementChild);
+        }
+        gameCount = 0;
+    }
+}

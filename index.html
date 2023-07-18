@@ -7,12 +7,34 @@
     <title>RPS Game</title>
 </head>
 <body>
-<script src="playgame.js" defer></script>    
-<button type="button" id="rock">rock</button>
-<button type="button" id="paper">paper</button>
-<button type="button" id="scissors">scissors</button>
-<div id="displayResults">
+    <script src="playgame.js" defer></script>  
+    <header>
+        <p>Rock Paper Scissors Game</p>
+    </header>
+    <main>
+        <article>
+            <h2>Select your choice:</h2>
+            <div class="button-container">
+                <button type="button" title="rock" id="rock">
+                    <img src="https://cdn-icons-png.flaticon.com/128/4866/4866842.png" alt=""/>
+                </button>
+                <button type="button" title="paper" id="paper">
+                    <img src="https://cdn-icons-png.flaticon.com/128/2541/2541979.png" alt=""/>
+                </button>
+                <button type="button" title="scissors" id="scissors">
+                    <img src="https://cdn-icons-png.flaticon.com/128/541/541957.png" alt=""/>
+                </button>
+            </div>
+        </article>
+        <article class="results">
+            <h2>Results</h2>
+            <div id="displayResults">
 
-</div>
-</body>
+            </div>
+        </article>
+    </main> 
+    <footer>
+        <p>Copyright: Haydn Atkinson 2023</p>
+    </footer>
+    </body>
 </html>
